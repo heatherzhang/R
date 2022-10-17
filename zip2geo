@@ -1,0 +1,17 @@
+# use https://cran.r-project.org/web/packages/zipcodeR/index.html to obtain latitude/longitude givem zipcode
+
+library(zipcodeR)
+library(stringr)
+
+# directory and filename of zip file to read from
+setwd("/mywd/")
+readfile = read.csv("zip.csv")
+
+# directory and filename to write to
+console <- file("/mywd/geo.txt")
+sink(console, append=TRUE)
+sink(conole, append=TRUE, type="message")
+
+for (row in 1:nrow(readfile)) {
+ tryCatch({print(geocode_zip(str_pad(readfile[row, "zip_code"], 5, pad='0')))}, error=function(error_condition){})
+}
